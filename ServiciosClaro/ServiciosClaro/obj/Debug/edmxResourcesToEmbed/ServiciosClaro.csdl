@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ServiciosClaroModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Clientes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Direccion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Telefono" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Cuenta" Type="Int32" />
+    <NavigationProperty Name="Cuentas" Relationship="Self.FK__Clientes__Cuenta__30F848ED" FromRole="Clientes" ToRole="Cuentas" />
+  </EntityType>
+  <EntityType Name="Cuentas">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Clave" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Clientes" Relationship="Self.FK__Clientes__Cuenta__30F848ED" FromRole="Cuentas" ToRole="Clientes" />
+    <NavigationProperty Name="Empleados" Relationship="Self.FK__Empleados__Cuent__2E1BDC42" FromRole="Cuentas" ToRole="Empleados" />
+    <NavigationProperty Name="RolCuentas" Relationship="Self.FK__RolCuenta__Cuent__276EDEB3" FromRole="Cuentas" ToRole="RolCuentas" />
+  </EntityType>
+  <EntityType Name="Empleados">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Telefono" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Puesto" Type="Int32" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Cedula" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FechaContratacion" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Cuenta" Type="Int32" />
+    <NavigationProperty Name="Cuentas" Relationship="Self.FK__Empleados__Cuent__2E1BDC42" FromRole="Empleados" ToRole="Cuentas" />
+    <NavigationProperty Name="Puestos" Relationship="Self.FK__Empleados__Puest__2D27B809" FromRole="Empleados" ToRole="Puestos" />
+  </EntityType>
+  <EntityType Name="Puestos">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Puesto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Empleados" Relationship="Self.FK__Empleados__Puest__2D27B809" FromRole="Puestos" ToRole="Empleados" />
+  </EntityType>
+  <EntityType Name="RolCuentas">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Cuenta" Type="Int32" Nullable="false" />
+    <Property Name="Rol" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Cuentas" Relationship="Self.FK__RolCuenta__Cuent__276EDEB3" FromRole="RolCuentas" ToRole="Cuentas" />
+    <NavigationProperty Name="Roles" Relationship="Self.FK__RolCuentas__Rol__286302EC" FromRole="RolCuentas" ToRole="Roles" />
+  </EntityType>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RolName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="RolCuentas" Relationship="Self.FK__RolCuentas__Rol__286302EC" FromRole="Roles" ToRole="RolCuentas" />
+  </EntityType>
+  <Association Name="FK__Clientes__Cuenta__30F848ED">
+    <End Role="Cuentas" Type="Self.Cuentas" Multiplicity="0..1" />
+    <End Role="Clientes" Type="Self.Clientes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cuentas">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Clientes">
+        <PropertyRef Name="Cuenta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Empleados__Cuent__2E1BDC42">
+    <End Role="Cuentas" Type="Self.Cuentas" Multiplicity="0..1" />
+    <End Role="Empleados" Type="Self.Empleados" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cuentas">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Empleados">
+        <PropertyRef Name="Cuenta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__RolCuenta__Cuent__276EDEB3">
+    <End Role="Cuentas" Type="Self.Cuentas" Multiplicity="1" />
+    <End Role="RolCuentas" Type="Self.RolCuentas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cuentas">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RolCuentas">
+        <PropertyRef Name="Cuenta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Empleados__Puest__2D27B809">
+    <End Role="Puestos" Type="Self.Puestos" Multiplicity="0..1" />
+    <End Role="Empleados" Type="Self.Empleados" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Puestos">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Empleados">
+        <PropertyRef Name="Puesto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__RolCuentas__Rol__286302EC">
+    <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+    <End Role="RolCuentas" Type="Self.RolCuentas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RolCuentas">
+        <PropertyRef Name="Rol" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ServiciosClaroEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Clientes" EntityType="Self.Clientes" />
+    <EntitySet Name="Cuentas" EntityType="Self.Cuentas" />
+    <EntitySet Name="Empleados" EntityType="Self.Empleados" />
+    <EntitySet Name="Puestos" EntityType="Self.Puestos" />
+    <EntitySet Name="RolCuentas" EntityType="Self.RolCuentas" />
+    <EntitySet Name="Roles" EntityType="Self.Roles" />
+    <AssociationSet Name="FK__Clientes__Cuenta__30F848ED" Association="Self.FK__Clientes__Cuenta__30F848ED">
+      <End Role="Cuentas" EntitySet="Cuentas" />
+      <End Role="Clientes" EntitySet="Clientes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Empleados__Cuent__2E1BDC42" Association="Self.FK__Empleados__Cuent__2E1BDC42">
+      <End Role="Cuentas" EntitySet="Cuentas" />
+      <End Role="Empleados" EntitySet="Empleados" />
+    </AssociationSet>
+    <AssociationSet Name="FK__RolCuenta__Cuent__276EDEB3" Association="Self.FK__RolCuenta__Cuent__276EDEB3">
+      <End Role="Cuentas" EntitySet="Cuentas" />
+      <End Role="RolCuentas" EntitySet="RolCuentas" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Empleados__Puest__2D27B809" Association="Self.FK__Empleados__Puest__2D27B809">
+      <End Role="Puestos" EntitySet="Puestos" />
+      <End Role="Empleados" EntitySet="Empleados" />
+    </AssociationSet>
+    <AssociationSet Name="FK__RolCuentas__Rol__286302EC" Association="Self.FK__RolCuentas__Rol__286302EC">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="RolCuentas" EntitySet="RolCuentas" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
