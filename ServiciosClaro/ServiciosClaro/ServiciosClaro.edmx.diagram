@@ -16,6 +16,7 @@
         <AssociationConnector Association="ServiciosClaroModel.FK__RolCuenta__Cuent__276EDEB3" ManuallyRouted="false" />
         <AssociationConnector Association="ServiciosClaroModel.FK__Empleados__Puest__2D27B809" ManuallyRouted="false" />
         <AssociationConnector Association="ServiciosClaroModel.FK__RolCuentas__Rol__286302EC" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ServiciosClaroModel.Productos" Width="1.5" PointX="5.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

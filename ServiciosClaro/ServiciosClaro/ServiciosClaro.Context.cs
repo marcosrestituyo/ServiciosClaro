@@ -31,6 +31,6 @@ namespace ServiciosClaro
         public virtual DbSet<Puestos> Puestos { get; set; }
         public virtual DbSet<RolCuentas> RolCuentas { get; set; }
         public virtual DbSet<Roles> Roles { get; set; }
-
+        public virtual DbSet<Productos> Productos { get; set; }
     }
 }

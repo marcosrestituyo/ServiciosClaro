@@ -166,6 +166,7 @@
     <Compile Include="Controllers\CuentasController.cs" />
     <Compile Include="Controllers\EmpleadosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProductosController.cs" />
     <Compile Include="Cuentas.cs">
       <DependentUpon>ServiciosClaro.tt</DependentUpon>
     </Compile>
@@ -176,8 +177,12 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Cuenta.cs" />
+    <Compile Include="Models\Producto.cs" />
     <Compile Include="Models\RegistrarCliente.cs" />
     <Compile Include="Models\RegistrarEmpleado.cs" />
+    <Compile Include="Productos.cs">
+      <DependentUpon>ServiciosClaro.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Puestos.cs">
       <DependentUpon>ServiciosClaro.tt</DependentUpon>
@@ -315,9 +320,15 @@
     <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\DateTime.cshtml" />
     <Content Include="Views\Empleados\Create.cshtml" />
+    <Content Include="Views\Productos\Create.cshtml" />
+    <Content Include="Views\Productos\Delete.cshtml" />
+    <Content Include="Views\Productos\Details.cshtml" />
+    <Content Include="Views\Productos\Edit.cshtml" />
+    <Content Include="Views\Productos\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Imagenes\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

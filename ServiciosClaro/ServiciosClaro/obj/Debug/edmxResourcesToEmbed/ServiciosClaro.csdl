@@ -151,5 +151,17 @@
       <End Role="Roles" EntitySet="Roles" />
       <End Role="RolCuentas" EntitySet="RolCuentas" />
     </AssociationSet>
+    <EntitySet Name="Productos" EntityType="ServiciosClaroModel.Productos" />
   </EntityContainer>
+  <EntityType Name="Productos">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Producto" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Cantidad" Type="Int32" Nullable="false" />
+    <Property Name="Precio" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Imagen" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
 </Schema>
