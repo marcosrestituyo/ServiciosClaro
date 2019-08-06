@@ -40,7 +40,6 @@ namespace ServiciosClaro.Controllers
         // GET: Empleados/Create
         public ActionResult Create()
         {
-            ViewBag.Cuenta = new SelectList(db.Cuentas, "Id", "Usuario");
             ViewBag.Puesto = new SelectList(db.Puestos, "Id", "Puesto");
             return View();
         }
@@ -50,18 +49,55 @@ namespace ServiciosClaro.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nombre,Telefono,Puesto,Email,Cedula,FechaContratacion,Cuenta")] Empleados empleados)
+        public ActionResult Create(ServiciosClaro.Models.RegistrarEmpleado e)
         {
             if (ModelState.IsValid)
             {
-                db.Empleados.Add(empleados);
+                db.Cuentas.Add(new Cuentas()
+                {
+                    Usuario = e.Usuario,
+                    Clave = e.Clave
+                });
+
                 db.SaveChanges();
+
+                var idcuenta = from c in db.Cuentas
+                               where c.Usuario == e.Usuario && c.Clave == e.Clave
+                               select c.Id;
+
+                int id = int.MinValue;
+
+                foreach (var item in idcuenta)
+                {
+                    id = item;
+                }
+
+                db.Empleados.Add(new Empleados()
+                {
+                    Nombre = e.Nombre,
+                    Telefono = e.Telefono,
+                    Puesto = e.Puesto,
+                    Email = e.Email,
+                    Cedula = e.Cedula,
+                    FechaContratacion = e.FechaContratacion,
+                    Cuenta = id
+                });
+
+                db.RolCuentas.Add(new RolCuentas()
+                {
+                    Cuenta = id,
+                    Rol = 2
+                });
+
+
+                db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
 
-            ViewBag.Cuenta = new SelectList(db.Cuentas, "Id", "Usuario", empleados.Cuenta);
-            ViewBag.Puesto = new SelectList(db.Puestos, "Id", "Puesto", empleados.Puesto);
-            return View(empleados);
+            ModelState.AddModelError("", "Complete los campos correctamente");
+            ViewBag.Puesto = new SelectList(db.Puestos, "Id", "Puesto", e.Puesto);
+            return View(e);
         }
 
         // GET: Empleados/Edit/5
@@ -76,6 +112,7 @@ namespace ServiciosClaro.Controllers
             {
                 return HttpNotFound();
             }
+
             ViewBag.Cuenta = new SelectList(db.Cuentas, "Id", "Usuario", empleados.Cuenta);
             ViewBag.Puesto = new SelectList(db.Puestos, "Id", "Puesto", empleados.Puesto);
             return View(empleados);

@@ -166,13 +166,19 @@ namespace ServiciosClaro.Controllers
 
                     db.SaveChanges();
 
+                    FormsAuthentication.SetAuthCookie(r.Usuario, false);
+                    return RedirectToAction("Index", "Home");
+
                 }
+
+               
 
             }
 
-            FormsAuthentication.SetAuthCookie(r.Usuario, false);
+            ModelState.AddModelError("", "Complete los campos correctamente");
+            return View(r);
 
-            return RedirectToAction("Index", "Home");
+            
         }
 
 
