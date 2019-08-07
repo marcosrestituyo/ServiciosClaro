@@ -11,25 +11,37 @@ using System.IO;
 
 namespace ServiciosClaro.Controllers
 {
+    [Authorize]
     public class ProductosController : Controller
     {
         private ServiciosClaroEntities db = new ServiciosClaroEntities();
 
+        [AllowAnonymous]
         public ActionResult MImagen(int id)
         {
-            var imagen = (from c in db.Productos
-                          where c.Id == id
-                          select c.Imagen).FirstOrDefault();
+            try
+            {
+                var imagen = (from c in db.Productos
+                              where c.Id == id
+                              select c.Imagen).FirstOrDefault();
 
-            return File(imagen, "Imagenes/jpg");
+                return File(imagen, "Imagenes/jpg");
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+            
         }
 
+        [AllowAnonymous]
         // GET: Productos
         public ActionResult Index()
         {
             return View(db.Productos.ToList());
         }
 
+        [AllowAnonymous]
         // GET: Productos/Details/5
         public ActionResult Details(int? id)
         {
@@ -45,6 +57,7 @@ namespace ServiciosClaro.Controllers
             return View(productos);
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: Productos/Create
         public ActionResult Create()
         {
@@ -56,6 +69,7 @@ namespace ServiciosClaro.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult Create(ServiciosClaro.Models.Producto p, HttpPostedFileBase Foto)
         {
             if (ModelState.IsValid)
@@ -91,6 +105,7 @@ namespace ServiciosClaro.Controllers
         }
 
 
+        [Authorize(Roles = "Admin")]
         // GET: Productos/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -111,6 +126,7 @@ namespace ServiciosClaro.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(Productos productos, HttpPostedFileBase Foto)
         {
             if (ModelState.IsValid)
@@ -125,7 +141,7 @@ namespace ServiciosClaro.Controllers
                         datosImagen = img.ReadBytes(Foto.ContentLength);
                     }
 
-                    //productos.Imagen = datosImagen;
+                    productos.Imagen = datosImagen;
 
                     db.Entry(productos).State = EntityState.Modified;
                     db.SaveChanges();
@@ -134,8 +150,12 @@ namespace ServiciosClaro.Controllers
                 }
                 else
                 {
-                    Productos pr = db.Productos.Find(productos.Id);
-                    //productos.Imagen = pr.Imagen;
+
+                    var imagen = (from c in db.Productos
+                                  where c.Id == productos.Id
+                                  select c.Imagen).FirstOrDefault();
+
+                    productos.Imagen = imagen;
 
                     db.Entry(productos).State = EntityState.Modified;
                     db.SaveChanges();
@@ -148,6 +168,7 @@ namespace ServiciosClaro.Controllers
             return View(productos);
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: Productos/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -166,6 +187,7 @@ namespace ServiciosClaro.Controllers
         // POST: Productos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult DeleteConfirmed(int id)
         {
             Productos productos = db.Productos.Find(id);

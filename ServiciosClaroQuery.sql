@@ -109,3 +109,6 @@ insert into Clientes values('Cliente Prueba', 'Los guandules C/San francisco #14
 select * from Clientes
 
 go
+
+
+select * from Productos
