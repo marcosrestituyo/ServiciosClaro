@@ -111,13 +111,39 @@ namespace ServiciosClaro.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Producto,Descripcion,Cantidad,Precio,Imagen")] Productos productos)
+        public ActionResult Edit(Productos productos, HttpPostedFileBase Foto)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(productos).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (Foto != null && Foto.ContentLength > 0)
+                {
+
+                    byte[] datosImagen = null;
+
+                    using (var img = new BinaryReader(Foto.InputStream))
+                    {
+                        datosImagen = img.ReadBytes(Foto.ContentLength);
+                    }
+
+                    //productos.Imagen = datosImagen;
+
+                    db.Entry(productos).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+
+                }
+                else
+                {
+                    Productos pr = db.Productos.Find(productos.Id);
+                    //productos.Imagen = pr.Imagen;
+
+                    db.Entry(productos).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                
+                
+                
             }
             return View(productos);
         }
