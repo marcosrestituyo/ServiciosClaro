@@ -27,6 +27,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <TypeScriptToolsVersion>1.8</TypeScriptToolsVersion>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -160,9 +161,11 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="AsignacionTecnico.cs" />
     <Compile Include="Clientes.cs">
       <DependentUpon>ServiciosClaro.tt</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\AsignacionEmpleadoController.cs" />
     <Compile Include="Controllers\CuentasController.cs" />
     <Compile Include="Controllers\EmpleadosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -178,6 +181,7 @@
     </Compile>
     <Compile Include="Models\Cuenta.cs" />
     <Compile Include="Models\Producto.cs" />
+    <Compile Include="Models\Recarga.cs" />
     <Compile Include="Models\RegistrarCliente.cs" />
     <Compile Include="Models\RegistrarEmpleado.cs" />
     <Compile Include="Productos.cs">
@@ -329,6 +333,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Imagenes\" />
+    <Folder Include="Views\AsignacionEmpleado\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

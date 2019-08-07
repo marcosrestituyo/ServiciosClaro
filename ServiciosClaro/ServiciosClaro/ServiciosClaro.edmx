@@ -70,7 +70,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="RolName" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <Association Name="FK__Clientes__Cuenta__30F848ED">
+        <Association Name="FK__Clientes__Cuenta__44FF419A">
           <End Role="Cuentas" Type="Self.Cuentas" Multiplicity="0..1" />
           <End Role="Clientes" Type="Self.Clientes" Multiplicity="*" />
           <ReferentialConstraint>
@@ -82,7 +82,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Empleados__Cuent__2E1BDC42">
+        <Association Name="FK__Empleados__Cuent__4222D4EF">
           <End Role="Cuentas" Type="Self.Cuentas" Multiplicity="0..1" />
           <End Role="Empleados" Type="Self.Empleados" Multiplicity="*" />
           <ReferentialConstraint>
@@ -94,7 +94,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Empleados__Puest__2D27B809">
+        <Association Name="FK__Empleados__Puest__412EB0B6">
           <End Role="Puestos" Type="Self.Puestos" Multiplicity="0..1" />
           <End Role="Empleados" Type="Self.Empleados" Multiplicity="*" />
           <ReferentialConstraint>
@@ -106,7 +106,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__RolCuenta__Cuent__276EDEB3">
+        <Association Name="FK__RolCuenta__Cuent__3B75D760">
           <End Role="Cuentas" Type="Self.Cuentas" Multiplicity="1" />
           <End Role="RolCuentas" Type="Self.RolCuentas" Multiplicity="*" />
           <ReferentialConstraint>
@@ -118,7 +118,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__RolCuentas__Rol__286302EC">
+        <Association Name="FK__RolCuentas__Rol__3C69FB99">
           <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
           <End Role="RolCuentas" Type="Self.RolCuentas" Multiplicity="*" />
           <ReferentialConstraint>
@@ -138,23 +138,23 @@
           <EntitySet Name="Puestos" EntityType="Self.Puestos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RolCuentas" EntityType="Self.RolCuentas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Clientes__Cuenta__30F848ED" Association="Self.FK__Clientes__Cuenta__30F848ED">
+          <AssociationSet Name="FK__Clientes__Cuenta__44FF419A" Association="Self.FK__Clientes__Cuenta__44FF419A">
             <End Role="Cuentas" EntitySet="Cuentas" />
             <End Role="Clientes" EntitySet="Clientes" />
           </AssociationSet>
-          <AssociationSet Name="FK__Empleados__Cuent__2E1BDC42" Association="Self.FK__Empleados__Cuent__2E1BDC42">
+          <AssociationSet Name="FK__Empleados__Cuent__4222D4EF" Association="Self.FK__Empleados__Cuent__4222D4EF">
             <End Role="Cuentas" EntitySet="Cuentas" />
             <End Role="Empleados" EntitySet="Empleados" />
           </AssociationSet>
-          <AssociationSet Name="FK__Empleados__Puest__2D27B809" Association="Self.FK__Empleados__Puest__2D27B809">
+          <AssociationSet Name="FK__Empleados__Puest__412EB0B6" Association="Self.FK__Empleados__Puest__412EB0B6">
             <End Role="Puestos" EntitySet="Puestos" />
             <End Role="Empleados" EntitySet="Empleados" />
           </AssociationSet>
-          <AssociationSet Name="FK__RolCuenta__Cuent__276EDEB3" Association="Self.FK__RolCuenta__Cuent__276EDEB3">
+          <AssociationSet Name="FK__RolCuenta__Cuent__3B75D760" Association="Self.FK__RolCuenta__Cuent__3B75D760">
             <End Role="Cuentas" EntitySet="Cuentas" />
             <End Role="RolCuentas" EntitySet="RolCuentas" />
           </AssociationSet>
-          <AssociationSet Name="FK__RolCuentas__Rol__286302EC" Association="Self.FK__RolCuentas__Rol__286302EC">
+          <AssociationSet Name="FK__RolCuentas__Rol__3C69FB99" Association="Self.FK__RolCuentas__Rol__3C69FB99">
             <End Role="Roles" EntitySet="Roles" />
             <End Role="RolCuentas" EntitySet="RolCuentas" />
           </AssociationSet>

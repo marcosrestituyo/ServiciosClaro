@@ -20,6 +20,7 @@ namespace ServiciosClaro.Controllers
         {
             var empleados = db.Empleados.Include(e => e.Cuentas).Include(e => e.Puestos);
             return View(empleados.ToList());
+            
         }
 
         // GET: Empleados/Details/5
