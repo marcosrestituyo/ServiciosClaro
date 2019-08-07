@@ -24,6 +24,7 @@ textarea {
 
 #linku{
     font-size: 14pt;
+    margin: 10px;
 }
 
 @media (min-width: 768px) {
@@ -53,4 +54,45 @@ textarea {
 
 .dl-horizontal dd:after {
   clear: both;
+}
+
+.producto{
+    text-align: center;
+    padding: 10px;
+    border: 2px dashed #343a40;
+    float: left;
+    margin: 15px;
+}
+
+#producto{
+    padding: 0px;
+    width: 30%;
+}
+
+.titulo{
+    padding: 10px;
+    margin: 5px;
+}
+
+.precio{
+    font-size: 14pt;
+    color: crimson;
+}
+.imagen img{
+    width: 95%;
+    height: auto;
+    padding: 10px;
+}
+
+.info{
+    padding-bottom: 10px;
+}
+
+#Volver{
+    font-size: 20pt;
+    margin: 15px;
+}
+
+.yu{
+    margin: 30px;
 }

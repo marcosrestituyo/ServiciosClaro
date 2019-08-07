@@ -71,6 +71,24 @@ Imagen image,
 
 go
 
+create table Tareas(
+Id int primary key identity,
+Tarea varchar(100) not null,
+Detalles varchar(500) not null,
+Cliente int references Clientes(Id)
+)
+
+go
+
+create table TareasEmpleados(
+Id int primary key identity,
+Tarea int references Tareas(Id),
+Empleado int references Empleados(Id),
+Estado varchar(50) check (Estado in('Terminada', 'En Espera')) not null
+)
+
+go
+
 
 
 
@@ -109,3 +127,6 @@ insert into Clientes values('Cliente Prueba', 'Los guandules C/San francisco #14
 select * from Clientes
 
 go
+
+
+select * from Productos
