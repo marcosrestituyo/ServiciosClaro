@@ -167,6 +167,7 @@
     <Compile Include="Controllers\EmpleadosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductosController.cs" />
+    <Compile Include="Controllers\TareasController.cs" />
     <Compile Include="Cuentas.cs">
       <DependentUpon>ServiciosClaro.tt</DependentUpon>
     </Compile>
@@ -178,6 +179,7 @@
     </Compile>
     <Compile Include="Models\Cuenta.cs" />
     <Compile Include="Models\Producto.cs" />
+    <Compile Include="Models\Recarga.cs" />
     <Compile Include="Models\RegistrarCliente.cs" />
     <Compile Include="Models\RegistrarEmpleado.cs" />
     <Compile Include="Productos.cs">
@@ -185,6 +187,9 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Puestos.cs">
+      <DependentUpon>ServiciosClaro.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Recargas.cs">
       <DependentUpon>ServiciosClaro.tt</DependentUpon>
     </Compile>
     <Compile Include="RolCuentas.cs">
@@ -207,6 +212,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ServiciosClaro.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Tareas.cs">
+      <DependentUpon>ServiciosClaro.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TareasEmpleados.cs">
+      <DependentUpon>ServiciosClaro.tt</DependentUpon>
     </Compile>
     <Compile Include="WebRoleProvider.cs" />
   </ItemGroup>
@@ -325,10 +336,15 @@
     <Content Include="Views\Productos\Details.cshtml" />
     <Content Include="Views\Productos\Edit.cshtml" />
     <Content Include="Views\Productos\Index.cshtml" />
+    <Content Include="Views\Tareas\Create.cshtml" />
+    <Content Include="Views\Tareas\Delete.cshtml" />
+    <Content Include="Views\Tareas\Details.cshtml" />
+    <Content Include="Views\Tareas\Edit.cshtml" />
+    <Content Include="Views\Tareas\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Imagenes\" />
+    <Folder Include="Imagenes\Tareas\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

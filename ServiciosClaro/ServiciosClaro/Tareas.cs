@@ -12,25 +12,21 @@ namespace ServiciosClaro
     using System;
     using System.Collections.Generic;
     
-    public partial class Empleados
+    public partial class Tareas
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Empleados()
+        public Tareas()
         {
+            this.Recargas = new HashSet<Recargas>();
             this.TareasEmpleados = new HashSet<TareasEmpleados>();
         }
     
         public int Id { get; set; }
-        public string Nombre { get; set; }
-        public string Telefono { get; set; }
-        public Nullable<int> Puesto { get; set; }
-        public string Email { get; set; }
-        public string Cedula { get; set; }
-        public System.DateTime FechaContratacion { get; set; }
-        public Nullable<int> Cuenta { get; set; }
+        public string Tarea { get; set; }
+        public string Detalles { get; set; }
     
-        public virtual Cuentas Cuentas { get; set; }
-        public virtual Puestos Puestos { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Recargas> Recargas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TareasEmpleados> TareasEmpleados { get; set; }
     }

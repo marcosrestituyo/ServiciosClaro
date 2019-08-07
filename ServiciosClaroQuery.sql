@@ -74,8 +74,7 @@ go
 create table Tareas(
 Id int primary key identity,
 Tarea varchar(100) not null,
-Detalles varchar(500) not null,
-Cliente int references Clientes(Id)
+Detalles varchar(500) not null
 )
 
 go
@@ -88,6 +87,18 @@ Estado varchar(50) check (Estado in('Terminada', 'En Espera')) not null
 )
 
 go
+
+create table Recargas(
+Id int primary key identity,
+Lugar varchar(100) not null,
+Precio decimal(18,2) not null,
+Celular varchar(25) not null,
+Cliente int references Clientes(Id),
+Tarea int references Tareas(Id) Default 1
+)
+
+go
+
 
 
 
@@ -130,3 +141,9 @@ go
 
 
 select * from Productos
+
+
+go
+
+insert into Tareas values('Recarga','Descripcion Recarga'),('Soporte Tecnico','Descripcion Soporte Tecnico'), ('Servicio 3','Servicio 3 Recarga')
+select * from Tareas

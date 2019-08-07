@@ -14,6 +14,12 @@ namespace ServiciosClaro
     
     public partial class Clientes
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Clientes()
+        {
+            this.Recargas = new HashSet<Recargas>();
+        }
+    
         public int Id { get; set; }
         public string Nombre { get; set; }
         public string Direccion { get; set; }
@@ -22,5 +28,7 @@ namespace ServiciosClaro
         public Nullable<int> Cuenta { get; set; }
     
         public virtual Cuentas Cuentas { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Recargas> Recargas { get; set; }
     }
 }

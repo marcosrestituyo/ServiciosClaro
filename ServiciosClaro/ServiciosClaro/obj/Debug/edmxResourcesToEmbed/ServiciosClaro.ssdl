@@ -50,6 +50,17 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Puesto" Type="varchar" MaxLength="50" Nullable="false" />
   </EntityType>
+  <EntityType Name="Recargas">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Lugar" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Precio" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Celular" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="Cliente" Type="int" />
+    <Property Name="Tarea" Type="int" />
+  </EntityType>
   <EntityType Name="RolCuentas">
     <Key>
       <PropertyRef Name="Id" />
@@ -64,6 +75,23 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="RolName" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Tareas">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Tarea" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Detalles" Type="varchar" MaxLength="500" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TareasEmpleados">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Tarea" Type="int" />
+    <Property Name="Empleado" Type="int" />
+    <Property Name="Estado" Type="varchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <Association Name="FK__Clientes__Cuenta__30F848ED">
     <End Role="Cuentas" Type="Self.Cuentas" Multiplicity="0..1" />
@@ -101,6 +129,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__Recargas__Client__4BAC3F29">
+    <End Role="Clientes" Type="Self.Clientes" Multiplicity="0..1" />
+    <End Role="Recargas" Type="Self.Recargas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clientes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Recargas">
+        <PropertyRef Name="Cliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Recargas__Tarea__4CA06362">
+    <End Role="Tareas" Type="Self.Tareas" Multiplicity="0..1" />
+    <End Role="Recargas" Type="Self.Recargas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tareas">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Recargas">
+        <PropertyRef Name="Tarea" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__RolCuenta__Cuent__276EDEB3">
     <End Role="Cuentas" Type="Self.Cuentas" Multiplicity="1" />
     <End Role="RolCuentas" Type="Self.RolCuentas" Multiplicity="*" />
@@ -125,14 +177,41 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__TareasEmp__Emple__47DBAE45">
+    <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
+    <End Role="TareasEmpleados" Type="Self.TareasEmpleados" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empleados">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TareasEmpleados">
+        <PropertyRef Name="Empleado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__TareasEmp__Tarea__46E78A0C">
+    <End Role="Tareas" Type="Self.Tareas" Multiplicity="0..1" />
+    <End Role="TareasEmpleados" Type="Self.TareasEmpleados" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tareas">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TareasEmpleados">
+        <PropertyRef Name="Tarea" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="ServiciosClaroModelStoreContainer">
     <EntitySet Name="Clientes" EntityType="Self.Clientes" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Cuentas" EntityType="Self.Cuentas" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Empleados" EntityType="Self.Empleados" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Productos" EntityType="Self.Productos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Puestos" EntityType="Self.Puestos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Recargas" EntityType="Self.Recargas" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RolCuentas" EntityType="Self.RolCuentas" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tareas" EntityType="Self.Tareas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TareasEmpleados" EntityType="Self.TareasEmpleados" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK__Clientes__Cuenta__30F848ED" Association="Self.FK__Clientes__Cuenta__30F848ED">
       <End Role="Cuentas" EntitySet="Cuentas" />
       <End Role="Clientes" EntitySet="Clientes" />
@@ -145,6 +224,14 @@
       <End Role="Puestos" EntitySet="Puestos" />
       <End Role="Empleados" EntitySet="Empleados" />
     </AssociationSet>
+    <AssociationSet Name="FK__Recargas__Client__4BAC3F29" Association="Self.FK__Recargas__Client__4BAC3F29">
+      <End Role="Clientes" EntitySet="Clientes" />
+      <End Role="Recargas" EntitySet="Recargas" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Recargas__Tarea__4CA06362" Association="Self.FK__Recargas__Tarea__4CA06362">
+      <End Role="Tareas" EntitySet="Tareas" />
+      <End Role="Recargas" EntitySet="Recargas" />
+    </AssociationSet>
     <AssociationSet Name="FK__RolCuenta__Cuent__276EDEB3" Association="Self.FK__RolCuenta__Cuent__276EDEB3">
       <End Role="Cuentas" EntitySet="Cuentas" />
       <End Role="RolCuentas" EntitySet="RolCuentas" />
@@ -152,6 +239,14 @@
     <AssociationSet Name="FK__RolCuentas__Rol__286302EC" Association="Self.FK__RolCuentas__Rol__286302EC">
       <End Role="Roles" EntitySet="Roles" />
       <End Role="RolCuentas" EntitySet="RolCuentas" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TareasEmp__Emple__47DBAE45" Association="Self.FK__TareasEmp__Emple__47DBAE45">
+      <End Role="Empleados" EntitySet="Empleados" />
+      <End Role="TareasEmpleados" EntitySet="TareasEmpleados" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TareasEmp__Tarea__46E78A0C" Association="Self.FK__TareasEmp__Tarea__46E78A0C">
+      <End Role="Tareas" EntitySet="Tareas" />
+      <End Role="TareasEmpleados" EntitySet="TareasEmpleados" />
     </AssociationSet>
   </EntityContainer>
 </Schema>
